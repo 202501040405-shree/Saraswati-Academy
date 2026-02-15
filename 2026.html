@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SARASWATI ACADEMY</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins', sans-serif;}
+body{background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);color:white;}
+header{text-align:center;padding:40px 20px;}
+header h1{font-size:42px;letter-spacing:2px;}
+header p{margin-top:10px;font-size:18px;opacity:0.9;}
+
+nav{text-align:center;margin-bottom:20px;}
+nav button{
+    background:rgba(255,255,255,0.2);
+    border:none;padding:10px 20px;margin:6px;
+    border-radius:25px;color:white;cursor:pointer;transition:0.3s;
+}
+nav button:hover{background:white;color:#2c5364;}
+
+.page{display:none;padding:30px;animation:fadeIn 0.4s ease-in-out;}
+.active{display:block;}
+
+.section{
+    max-width:1100px;margin:auto;
+    background:rgba(255,255,255,0.1);
+    padding:30px;border-radius:15px;
+    margin-bottom:30px;backdrop-filter:blur(15px);
+}
+.section h2{text-align:center;margin-bottom:20px;}
+
+.results,.feedback{
+    display:flex;flex-wrap:wrap;justify-content:center;gap:20px;
+}
+
+.result-card,.feedback-card,.card{
+    background:rgba(255,255,255,0.2);
+    padding:20px;border-radius:12px;
+    width:250px;text-align:center;
+}
+
+.feedback-card{width:280px;font-size:14px;}
+
+input,select,textarea{
+    width:100%;padding:8px;margin:8px 0;
+    border:none;border-radius:6px;
+}
+
+.btn{
+    padding:8px 15px;border:none;border-radius:20px;
+    cursor:pointer;font-weight:600;
+}
+.add-btn{background:#00c9a7;color:white;}
+.delete-btn{background:#ff4b5c;color:white;}
+
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;justify-content:center;}
+.tab-btn{
+    padding:8px 15px;border:none;border-radius:20px;
+    cursor:pointer;background:rgba(255,255,255,0.2);color:white;
+}
+.tab-btn.active-tab{background:white;color:#2c5364;}
+
+.pdf-list a{
+    display:block;background:rgba(255,255,255,0.2);
+    padding:8px;margin:6px 0;border-radius:8px;
+    text-decoration:none;color:white;
+}
+
+footer{text-align:center;padding:20px;opacity:0.8;}
+
+@keyframes fadeIn{
+    from{opacity:0;transform:translateY(10px);}
+    to{opacity:1;transform:translateY(0);}
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>📚 SARASWATI ACADEMY</h1>
+    <p>Shaping Bright Futures Through Quality Education</p>
+</header>
+
+<nav>
+    <button onclick="showPage('home')">Home</button>
+    <button onclick="showPage('students')">Student Section</button>
+    <button onclick="showPage('notes')">Notes</button>
+    <button onclick="showPage('admission')">New Admission</button>
+</nav>
+
+<!-- HOME -->
+<div id="home" class="page active">
+
+<div class="section">
+<h2>About Us</h2>
+<p>SARASWATI ACADEMY focuses on concept clarity, discipline and excellence.</p>
+</div>
+
+<div class="section">
+<h2>🌟 Outstanding Results</h2>
+<div class="results">
+<div class="result-card"><h3>100%</h3><p>Pass Percentage</p></div>
+<div class="result-card"><h3>95%</h3><p>Highest Score</p></div>
+<div class="result-card"><h3>15+</h3><p>students involved in Co-Curicular activities</p></div>
+<div class="result-card"><h3>7+</h3><p>Class Toppers From Different Schools</p></div>
+</div>
+</div>
+
+<div class="section">
+<h2>🎓 Student Feedback</h2>
+<div class="feedback">
+<div class="feedback-card">"Best academy for strong basics." <br><br><b>- Rahul</b></div>
+<div class="feedback-card">"Personal attention helped me score 85%." <br><br><b>- Priya</b></div>
+<div class="feedback-card">"Regular tests improved my confidence." <br><br><b>- Arjun</b></div>
+<div class="feedback-card">"Doubt sessions are very helpful." <br><br><b>- Sneha</b></div>
+</div>
+</div>
+
+</div>
+
+<!-- STUDENT SECTION -->
+<div id="students" class="page">
+<div class="section">
+<h2>Student Management</h2>
+
+<input type="text" id="name" placeholder="Name">
+<input type="number" id="age" placeholder="Age">
+<input type="text" id="grade" placeholder="Grade">
+<button class="btn add-btn" onclick="addStudent()">Add Student</button>
+
+<div id="studentList"></div>
+</div>
+</div>
+
+<!-- NOTES SECTION -->
+<div id="notes" class="page">
+<div class="section">
+<h2>📖 Study Notes</h2>
+
+<div class="tabs" id="classTabs"></div>
+
+<select id="classSelect"></select>
+<input type="file" id="pdfUpload" accept="application/pdf">
+<button class="btn add-btn" onclick="uploadPDF()">Upload</button>
+
+<hr style="margin:20px 0;">
+
+<div class="pdf-list" id="pdfList"></div>
+</div>
+</div>
+
+<!-- ADMISSION SECTION -->
+<div id="admission" class="page">
+<div class="section">
+<h2>📝 Admission Details</h2>
+
+<input type="text" id="adName" placeholder="Student Name">
+<input type="text" id="adParent" placeholder="Parent Name">
+<input type="text" id="adAddress" placeholder="Address">
+<input type="tel" id="adPhone" placeholder="Phone Number">
+
+<select id="adClass">
+<option value="">Select Class</option>
+<option>Nursery</option><option>LKG</option><option>UKG</option>
+<option>1</option><option>2</option><option>3</option>
+<option>4</option><option>5</option><option>6</option>
+<option>7</option><option>8</option><option>9</option>
+<option>10</option>
+</select>
+
+<textarea id="adMessage" placeholder="Additional Info"></textarea>
+
+<button class="btn add-btn" onclick="sendAdmission()">Submit Admission</button>
+</div>
+</div>
+
+<footer>© 2026 SARASWATI ACADEMY | Excellence in Education</footer>
+
+<script>
+function showPage(pageId){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.getElementById(pageId).classList.add('active');
+}
+
+/* STUDENT MANAGEMENT */
+function addStudent(){
+let name=document.getElementById("name").value;
+let age=document.getElementById("age").value;
+let grade=document.getElementById("grade").value;
+let students=JSON.parse(localStorage.getItem("students"))||[];
+students.push({name,age,grade});
+localStorage.setItem("students",JSON.stringify(students));
+displayStudents();
+}
+
+function displayStudents(){
+let list=document.getElementById("studentList");
+list.innerHTML="";
+let students=JSON.parse(localStorage.getItem("students"))||[];
+students.forEach((s,i)=>{
+list.innerHTML+=`
+<div class="card">
+${s.name} | Age: ${s.age} | Grade: ${s.grade}
+<br>
+<button class="btn delete-btn" onclick="deleteStudent(${i})">Delete</button>
+</div>`;
+});
+}
+function deleteStudent(index){
+let students=JSON.parse(localStorage.getItem("students"))||[];
+students.splice(index,1);
+localStorage.setItem("students",JSON.stringify(students));
+displayStudents();
+}
+displayStudents();
+
+/* NOTES */
+const classes=["Nursery","LKG","UKG","1","2","3","4","5","6","7","8","9","10"];
+const tabs=document.getElementById("classTabs");
+const select=document.getElementById("classSelect");
+let currentClass="Nursery";
+
+classes.forEach(cls=>{
+let tab=document.createElement("button");
+tab.innerText=cls;
+tab.className="tab-btn";
+tab.onclick=(e)=>{
+currentClass=cls;
+document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active-tab"));
+e.target.classList.add("active-tab");
+displayPDFs();
+};
+tabs.appendChild(tab);
+
+let option=document.createElement("option");
+option.value=cls;
+option.innerText=cls;
+select.appendChild(option);
+});
+
+function uploadPDF(){
+const file=document.getElementById("pdfUpload").files[0];
+const selectedClass=document.getElementById("classSelect").value;
+if(!file) return alert("Select PDF");
+const reader=new FileReader();
+reader.onload=function(e){
+let notes=JSON.parse(localStorage.getItem("notes"))||{};
+if(!notes[selectedClass]) notes[selectedClass]=[];
+notes[selectedClass].push({name:file.name,data:e.target.result});
+localStorage.setItem("notes",JSON.stringify(notes));
+displayPDFs();
+};
+reader.readAsDataURL(file);
+}
+
+function displayPDFs(){
+const list=document.getElementById("pdfList");
+list.innerHTML="";
+let notes=JSON.parse(localStorage.getItem("notes"))||{};
+let classNotes=notes[currentClass]||[];
+classNotes.forEach(note=>{
+let link=document.createElement("a");
+link.href=note.data;
+link.target="_blank";
+link.innerText=note.name;
+list.appendChild(link);
+});
+}
+displayPDFs();
+
+/* ADMISSION WHATSAPP */
+function sendAdmission(){
+const name=document.getElementById("adName").value;
+const parent=document.getElementById("adParent").value;
+const address=document.getElementById("adAddress").value;
+const phone=document.getElementById("adPhone").value;
+const className=document.getElementById("adClass").value;
+const message=document.getElementById("adMessage").value;
+
+if(!name||!parent||!address||!phone||!className){
+alert("Please fill all required fields");
+return;
+}
+
+let text=`New Admission Inquiry:%0A
+Student Name: ${name}%0A
+Parent Name: ${parent}%0A
+Address: ${address}%0A
+Phone: ${phone}%0A
+Class: ${className}%0A
+Message: ${message}`;
+
+window.open(`https://wa.me/919156134662?text=${text}`,"_blank");
+}
+</script>
+
+</body>
+</html>
